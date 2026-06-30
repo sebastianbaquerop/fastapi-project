@@ -1,15 +1,18 @@
 
-1. Scaffold ✅
-   - api (controllers)
-   - core (call external APIs, configs, security)
-   - db (Tables Models)
-   - repositories (behavior to database)
-   - schemas (DTOs - Requests & Responses)
-   - services (call repositories)
-   - test (Integration Test, Unit Test)
+1. Scaffold 
+   - api/ # API endpoints (GET, POST, PATCH, PUT, DELETE) ✅
+   - core/ (call external APIs, configs, security) ✅
+   - db/ (Tables Models) ✅
+   - repositories/ (behavior to database) ✅
+   - schemas/ #Pydantic models (DTOs - Requests & Responses) ✅
+   - services/ # Business logic and external api calls ✅
+   - test/ #Test Features (Integration Test, Unit Test) ✅
+   - requirements.txt # Dependencies
+   - .env # Secrets
+   - config.py # Environment variables
 2. APIs
    - Users ✅
-   - Items
+   - Users V2 ✅
 3. Versioning ✅
 
 
@@ -37,16 +40,20 @@ Steps:
       docker compose up
       ```
    **Nota: Improvement to valida if the database exist and the tables exist ✅
-6. Testing 
-7. Deployed 
-8. Env vars 
-9. Ignore 
-10. Linter 
-11. Formatter 
-12. Dockerize all the project
-13. Readme 
-14. Deployement or Release
-15. Exercise
+6. External Dependencies (Pokemon APIs) ✅
+7. Testing 
+   - Set up:
+     - DB Testing
+     - Mock External Dependencies (E.g. Pokemon API)
+8. Env Variables
+9. Deployed
+10. Ignore 
+11. Linter 
+12. Formatter 
+13. Dockerize all the project
+14. Readme 
+15. Deployement or Release
+16. Exercise
 
 Dependencies:
 - pip install virtualenv
@@ -56,6 +63,8 @@ Dependencies:
 - pip install sqlalchemy
 - pip install psycopg2-binary # For testing/development
 - pip install psycopg2 # postgresql adapter for producction
+- pip install httpx
+- pip install tenacity
 
 Settings:
 - all the folder inside 'app' must have the file '__init__.py'

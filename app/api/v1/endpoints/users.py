@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from app.schemas.user_dto import UserResponse, UserCreateDTO, UserUpdateDTO, UserPatchDTO, UsersResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
@@ -33,7 +33,7 @@ async def get_users_by_id(id: int, db: Session = Depends(get_db)):
         user = user_service.get_user_by_id(id)
         response = UserResponse(
             code=status.HTTP_200_OK, 
-            message="User created", 
+            message="Data obtained", 
             data=user)
         return response
 

@@ -2,11 +2,11 @@ from sqlalchemy.orm import Session
 from app.repositories.user_repository import UserRepository
 from app.schemas.user_dto import UserCreateDTO, UserDTO, UserPatchDTO
 from typing import Optional, List
-
 class UserService:
 
     def __init__(self, db_session: Session):
         self.repository = UserRepository(db_session)
+        self.pokemon_api_url = "https://pokeapi.co/api/v2/pokemon/"
     
     def create_user(self, user_data: UserCreateDTO) -> UserDTO:
         user = self.repository.get_by_email(user_data.email)
