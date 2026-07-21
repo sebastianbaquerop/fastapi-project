@@ -24,13 +24,10 @@ class UserAndPokemonService:
     
     def create_user(self, user_data: UserAndPokemonsCreateDTO) -> UsersAndPokemonsDTO:
         user_and_pokemons = self.repository.get_by_email(user_data.email)
-        print(f"create_user - user_and_pokemons =======> {user_and_pokemons}")
         if user_and_pokemons:
             raise ValueError("Email already registered")
         user_and_pokemons = self.repository.create(user_data)
-        print(f"create_user - user_and_pokemons =======> {user_and_pokemons}")
         user_and_pokemons_dto = UsersAndPokemonsDTO.model_validate(user_and_pokemons)
-        print(f"create_user - user_and_pokemons_dto =======> {user_and_pokemons_dto}")
         return user_and_pokemons_dto
 
     def get_users(self)->List[UsersAndPokemonsDTO]:

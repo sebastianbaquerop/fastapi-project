@@ -2,7 +2,7 @@ from sqlalchemy import URL, create_engine
 from sqlalchemy.orm import sessionmaker
 from app.db.models.base_model import Base
 
-# 1. Connection settings
+# Connection settings
 USER = 'admin'
 PASS = '10102025!'
 HOST = '127.0.0.1'
@@ -11,6 +11,7 @@ DB = 'take_home_challenge'
 IS_TEST_ENV = True
 
 print(f"Localhost: {HOST}")
+# Manage Dev/Prod DB
 if IS_TEST_ENV is True:
     SQLARCHEMY_DATABASE_URL = 'sqlite:///take_home_challenge.db'
     print('Test DB')
@@ -26,8 +27,11 @@ else:
     )
     print('Prod DB')
 
+# Create DB engine
 engine = create_engine(url=SQLARCHEMY_DATABASE_URL)
 
+
+# Create a sessionmaker to manage sessions
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

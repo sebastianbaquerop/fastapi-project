@@ -79,7 +79,7 @@ async def update_user(id: int, user: UserAndPokemonsUpdateDTO, db: Session = Dep
             detail=str(e)
         )
 
-@router.patch("/users/{id}", summary="Update some user info", response_model=UsersAndPokemonsResponse,status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,dependencies=[Depends(get_db)])
+@router.patch("/users/{id}", summary="Update some user info", response_model=UsersAndPokemonsResponse,status_code=status.HTTP_200_OK,dependencies=[Depends(get_db)])
 async def update_user(id: int, user_data: UserAndPokemonsPatchDTO, db: Session = Depends(get_db),  client = Depends(get_http_client)):
     user_service = UserAndPokemonService(db,client)
     try:
