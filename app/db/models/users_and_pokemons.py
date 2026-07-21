@@ -30,6 +30,6 @@ class UsersAndPokemons(Base):
     # Space for relationship
 
     def __repr__(self):
-        return f"<User(id={self.id}, name='{self.name}', email='{self.email}',hashed_password='{self.hashed_password}',role='{self.role}',pokemonsIds='{self.pokemon_ids}',created_at='{self.created_at}',updated_at='{self.updated_at}')>"
+        return f"<User(id={self.id}, name='{self.name}', email='{self.email}',hashed_password='{self.hashed_password}',role='{self.role}',pokemons_ids='{self.pokemon_ids}',created_at='{self.created_at}',updated_at='{self.updated_at}')>"
     
 

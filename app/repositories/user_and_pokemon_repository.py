@@ -43,7 +43,6 @@ class UserAndPokemonRepository:
             return None
         patch_data = user_data.model_dump(exclude_unset=True)
         for key,value in patch_data.items():
-
                 setattr(user, key,value)
         user.updated_at = datetime.now(timezone.utc)
         self.db.commit()
