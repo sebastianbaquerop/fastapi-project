@@ -4,7 +4,9 @@ from datetime import datetime, timezone
 
 
 class Users(Base):
-    __tablename__ = "users"  # Tells SQLAlchemy to create a table named "users"
+    __tablename__ = (
+        "users"  # Tells SQLAlchemy to create a table named "users"
+    )
 
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     name = Column(String(100), nullable=False)

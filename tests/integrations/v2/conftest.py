@@ -38,7 +38,9 @@ def get_all_users_and_pokemons_response_success_mock(
     data: List[UsersAndPokemonsDTO] = []
     data.append(users_and_pokemon_dto_mock)
 
-    return UsersAndPokemonsResponseList(code=200, message="Data obtained", data=data)
+    return UsersAndPokemonsResponseList(
+        code=200, message="Data obtained", data=data
+    )
 
 
 # Response by Id:
@@ -131,7 +133,9 @@ def put_users_and_pokemons_response_success_mock(
     put_users_and_pokemon_dto_mock: UsersAndPokemonsDTO,
 ):
     return UsersAndPokemonsResponse(
-        code=200, message="User info updated", data=put_users_and_pokemon_dto_mock
+        code=200,
+        message="User info updated",
+        data=put_users_and_pokemon_dto_mock,
     )
 
 
@@ -170,7 +174,9 @@ def patch_users_and_pokemons_response_success_mock(
     patch_users_and_pokemon_dto_mock: UsersAndPokemonsDTO,
 ):
     return UsersAndPokemonsResponse(
-        code=200, message="User info updated", data=patch_users_and_pokemon_dto_mock
+        code=200,
+        message="User info updated",
+        data=patch_users_and_pokemon_dto_mock,
     )
 
 

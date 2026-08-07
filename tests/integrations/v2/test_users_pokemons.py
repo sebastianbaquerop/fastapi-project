@@ -119,7 +119,9 @@ def test_put_success(
     # Arrange
     user_id = "1"
     payload = user_and_pokemons_update_dto_mock.model_dump(mode="json")
-    mock_response = put_users_and_pokemons_response_success_mock.model_dump(mode="json")
+    mock_response = put_users_and_pokemons_response_success_mock.model_dump(
+        mode="json"
+    )
     status_code = 200
     # Act
     response = test_client.put("/v2/users/" + user_id, json=payload)
@@ -157,8 +159,10 @@ def test_patch_user_success(
     user_id = "1"
     payload = patch_user_and_pokemons_patch_dto_mock.model_dump(mode="json")
     print(f"test_patch_success - payload ======> {payload}")
-    mock_response = patch_users_and_pokemons_response_success_mock.model_dump(
-        mode="json"
+    mock_response = (
+        patch_users_and_pokemons_response_success_mock.model_dump(
+            mode="json"
+        )
     )
     status_code = 200
     # Act

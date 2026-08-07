@@ -23,7 +23,9 @@ router = APIRouter(tags=["Users"])
     status_code=status.HTTP_200_OK,
     dependencies=[Depends(get_db)],
 )
-async def get_users(db: Session = Depends(get_db), client=Depends(get_http_client)):
+async def get_users(
+    db: Session = Depends(get_db), client=Depends(get_http_client)
+):
 
     user_service = UserAndPokemonService(db_session=db, http_client=client)
     try:
@@ -58,7 +60,9 @@ async def get_users_by_id(
         return response
 
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=str(e)
+        )
 
 
 @router.post(
@@ -83,7 +87,9 @@ async def add_user(
         return response
 
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)
+        )
 
 
 @router.put(
@@ -157,4 +163,6 @@ async def delete_user(
         response = {"code": 200, "message": "User deleted successfully"}
         return response
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_406_NOT_ACCEPTABLE, detail=str(e)
+        )

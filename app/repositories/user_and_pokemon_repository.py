@@ -12,7 +12,9 @@ class UserAndPokemonRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def create(self, user_data: UserAndPokemonsCreateDTO) -> UsersAndPokemons:
+    def create(
+        self, user_data: UserAndPokemonsCreateDTO
+    ) -> UsersAndPokemons:
         user = UsersAndPokemons(**user_data.model_dump())
         self.db.add(user)
         self.db.commit()

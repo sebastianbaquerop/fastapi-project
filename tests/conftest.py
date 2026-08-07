@@ -32,7 +32,9 @@ HOST = config.get("DB_HOST")  #'127.0.0.1'
 PORT = config.get("DB_PORT")  #'5432'
 DB_NAME = config.get("DB_NAME")  #'take_home_challenge'
 IS_TEST_ENV = config.get("IS_TEST_ENV")  # True
-POKEMON_API_URL = config.get("POKEMON_API_URL")  # "https://pokeapi.co/api/v2/pokemon/"
+POKEMON_API_URL = config.get(
+    "POKEMON_API_URL"
+)  # "https://pokeapi.co/api/v2/pokemon/"
 
 # Manage Dev/Prod DB Test
 if IS_TEST_ENV == "true":
@@ -54,7 +56,9 @@ else:
 engine = create_engine(url=SQLARCHEMY_DATABASE_URL)
 
 # Create a sessionmaker to manage sessions
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+TestingSessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine
+)
 
 # Create table in the database
 Base.metadata.create_all(bind=engine)
@@ -121,7 +125,9 @@ async def get_pokemon_data_mock():
 async def get_pokemon_data_error_mock(pokemon_id: int):
     """Mock Pokemon API Call"""
     respx.get(POKEMON_API_URL + pokemon_id).mock(
-        return_value=Response(status_code=500, json={"error": "Server error"})
+        return_value=Response(
+            status_code=500, json={"error": "Server error"}
+        )
     )
 
 

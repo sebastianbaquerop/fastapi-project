@@ -54,7 +54,9 @@ async def get_users_by_id(id: int, db: Session = Depends(get_db)):
         return response
 
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=str(e)
+        )
 
 
 @router.post(
@@ -75,7 +77,9 @@ async def add_user(user_data: UserCreateDTO, db: Session = Depends(get_db)):
         return response
 
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)
+        )
 
 
 @router.put(
@@ -85,7 +89,9 @@ async def add_user(user_data: UserCreateDTO, db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK,
     dependencies=[Depends(get_db)],
 )
-async def update_user(id: int, user: UserUpdateDTO, db: Session = Depends(get_db)):
+async def update_user(
+    id: int, user: UserUpdateDTO, db: Session = Depends(get_db)
+):
     user_service = UserService(db)
     try:
         user = user_service.update_user(id, user)
@@ -106,7 +112,9 @@ async def update_user(id: int, user: UserUpdateDTO, db: Session = Depends(get_db
     status_code=status.HTTP_200_OK,
     dependencies=[Depends(get_db)],
 )
-async def update_user(id: int, user_data: UserPatchDTO, db: Session = Depends(get_db)):
+async def update_user(
+    id: int, user_data: UserPatchDTO, db: Session = Depends(get_db)
+):
     user_service = UserService(db)
     try:
         user = user_service.patch_user(id, user_data)
@@ -137,4 +145,6 @@ async def delete_user(id: int, db: Session = Depends(get_db)):
         response = {"code": 200, "message": "User deleted successfully"}
         return response
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_406_NOT_ACCEPTABLE, detail=str(e)
+        )

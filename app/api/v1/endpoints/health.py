@@ -18,23 +18,31 @@ async def health_check(db: Session = Depends(get_db)):
         connection = db.connection()
         # Create inspector and check
         inspector = inspect(connection)
-        print(f"inspector.has_table('users'): {inspector.has_table('users')}")
+        print(
+            f"inspector.has_table('users'): {inspector.has_table('users')}"
+        )
         if not inspector.has_table("users"):
             init_db()
             print('table "users" were created in the database')
-            response["schemas"] = "Tables schemas were created in the database"
+            response["schemas"] = (
+                "Tables schemas were created in the database"
+            )
         print(
             f"inspector.has_table('users_and_pokemons'): {inspector.has_table('users_and_pokemons')}"
         )
         if not inspector.has_table("users_and_pokemons"):
             init_db()
             print('table "users_and_pokemons" were created in the database')
-            response["schemas"] = "Tables schemas were created in the database"
+            response["schemas"] = (
+                "Tables schemas were created in the database"
+            )
         response["schemas"] = "Tables are already presented in the database"
         print(f"health_check - response: {response}")
 
     except Exception as e:
         db = f"unhealthy: {str(e)}"
-        raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail=db)
+        raise HTTPException(
+            status_code=status.HTTP_501_NOT_IMPLEMENTED, detail=db
+        )
 
     return {"code": status.HTTP_200_OK, "info": response}

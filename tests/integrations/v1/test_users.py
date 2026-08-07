@@ -21,7 +21,9 @@ def test_get_user_value_error(
     from unittest.mock import patch
 
     """Test that ValueError in service returns 500 error."""
-    with patch("app.api.v1.endpoints.users.UserService.get_users") as mock_service:
+    with patch(
+        "app.api.v1.endpoints.users.UserService.get_users"
+    ) as mock_service:
         # Arrange
         mock_service.side_effect = ValueError("Internal server error")
         # Act
@@ -72,7 +74,9 @@ def test_post_user_success(
     )
 
 
-def test_post_user_with_pokemons_error(test_client, user_create_dto_mock, post_error):
+def test_post_user_with_pokemons_error(
+    test_client, user_create_dto_mock, post_error
+):
     """Test create user error"""
     # Arrange
     status_code = 400
@@ -85,7 +89,9 @@ def test_post_user_with_pokemons_error(test_client, user_create_dto_mock, post_e
     assert response.json() == mock_error_response
 
 
-def test_get_user_by_id_success(test_client, get_user_info_by_id_response_success_mock):
+def test_get_user_by_id_success(
+    test_client, get_user_info_by_id_response_success_mock
+):
     """Test to retrieve information of id user with success"""
     # Arrange
     user_id = "1"

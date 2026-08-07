@@ -1,5 +1,13 @@
 from app.db.models.base_model import Base
-from sqlalchemy import Column, Integer, String, DateTime, ARRAY, MetaData, JSON
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    DateTime,
+    ARRAY,
+    MetaData,
+    JSON,
+)
 from datetime import datetime, timezone
 
 

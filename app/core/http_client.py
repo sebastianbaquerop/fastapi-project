@@ -19,11 +19,17 @@ class HTTPClient:
         stop=stop_after_attempt(3),
         wait=wait_exponential(multiplier=1, min=2, max=5),
         retry=retry_if_exception_type(
-            (httpx.ConnectTimeout, httpx.RemoteProtocolError, httpx.HTTPStatusError)
+            (
+                httpx.ConnectTimeout,
+                httpx.RemoteProtocolError,
+                httpx.HTTPStatusError,
+            )
         ),
     )
     async def request(self, method: str, url: str, **kwargs):
-        response = await self.client.request(method=method, url=url, **kwargs)
+        response = await self.client.request(
+            method=method, url=url, **kwargs
+        )
         response.raise_for_status()
         return response.json()
 
