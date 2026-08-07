@@ -3,6 +3,7 @@ from typing import Optional, List
 from datetime import datetime, timezone
 from app.schemas.pokemon_dto import PokemonsDTO
 
+
 class UsersAndPokemonsDTO(BaseModel):
     id: int
     name: str
@@ -10,10 +11,13 @@ class UsersAndPokemonsDTO(BaseModel):
     role: str
     hashed_password: str
     pokemon_ids: list[int]
-    created_at: Optional[datetime]  = datetime.now((timezone.utc))
-    updated_at: Optional[datetime]  = datetime.now((timezone.utc))
-   
-    model_config = ConfigDict(from_attributes=True)  # Enable reading objects from SQLAlchemy ORM
+    created_at: Optional[datetime] = datetime.now((timezone.utc))
+    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+
+    model_config = ConfigDict(
+        from_attributes=True
+    )  # Enable reading objects from SQLAlchemy ORM
+
 
 class UserAndPokemonsDTO(BaseModel):
     id: int
@@ -23,10 +27,12 @@ class UserAndPokemonsDTO(BaseModel):
     hashed_password: str
     pokemon_ids: list[int]
     pokemons: List[PokemonsDTO]
-    created_at: Optional[datetime]  = datetime.now((timezone.utc))
-    updated_at: Optional[datetime]  = datetime.now((timezone.utc))
-   
-    model_config = ConfigDict(from_attributes=True)  # Enable reading objects from SQLAlchemy ORM
+    created_at: Optional[datetime] = datetime.now((timezone.utc))
+    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+
+    model_config = ConfigDict(
+        from_attributes=True
+    )  # Enable reading objects from SQLAlchemy ORM
 
 
 class UserAndPokemonsCreateDTO(BaseModel):
@@ -35,10 +41,13 @@ class UserAndPokemonsCreateDTO(BaseModel):
     role: str
     hashed_password: str
     pokemon_ids: list[int]
-    created_at: Optional[datetime]  = datetime.now((timezone.utc))
-    updated_at: Optional[datetime]  = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now((timezone.utc))
+    updated_at: Optional[datetime] = datetime.now((timezone.utc))
 
-    model_config = ConfigDict(from_attributes=True) # Enable reading objects from SQLAlchemy ORM
+    model_config = ConfigDict(
+        from_attributes=True
+    )  # Enable reading objects from SQLAlchemy ORM
+
 
 class UserAndPokemonsUpdateDTO(BaseModel):
     name: str
@@ -46,8 +55,9 @@ class UserAndPokemonsUpdateDTO(BaseModel):
     role: str
     hashed_password: str
     pokemon_ids: list[int]
-    created_at: Optional[datetime]  = datetime.now((timezone.utc))
-    updated_at: Optional[datetime]  = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now((timezone.utc))
+    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+
 
 class UserAndPokemonsPatchDTO(BaseModel):
     name: Optional[str] = None
@@ -55,23 +65,23 @@ class UserAndPokemonsPatchDTO(BaseModel):
     role: Optional[str] = None
     hashed_password: Optional[str] = None
     pokemon_ids: Optional[list[int]] = None
-    created_at: Optional[datetime]  = datetime.now((timezone.utc))
-    updated_at: Optional[datetime]  = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now((timezone.utc))
+    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+
 
 class UsersAndPokemonsResponse(BaseModel):
     code: int
     message: str
     data: UsersAndPokemonsDTO
 
+
 class UserAndPokemonsInfoResponse(BaseModel):
     code: int
     message: str
     data: UserAndPokemonsDTO
 
+
 class UsersAndPokemonsResponseList(BaseModel):
     code: int
     message: str
     data: List[UsersAndPokemonsDTO] = []
-
- 
-    

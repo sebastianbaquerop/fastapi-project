@@ -4,6 +4,7 @@ from app.api.v2 import routes as v2_router
 from contextlib import asynccontextmanager
 from app.core.http_client import HTTPClient
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: Create Singleton
@@ -19,13 +20,14 @@ async def lifespan(app: FastAPI):
     yield
     await app.state.http_client.close()
 
+
 # Root App (Gateway) - Lifespan attached HERE
 app = FastAPI(
     title="Take Home Challenge API Gateway",
     description="Select a version below or visit /docs/v1, /docs/v2",
     docs_url=None,
     openapi_url=None,
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 # API v1
@@ -43,7 +45,7 @@ app_v1 = FastAPI(
     license_info={
         "name": "MIT License",
         "url": "https://opensource.org/licenses/MIT",
-    }
+    },
 )
 
 # API v2
@@ -61,7 +63,7 @@ app_v2 = FastAPI(
     license_info={
         "name": "MIT License",
         "url": "https://opensource.org/licenses/MIT",
-    }
+    },
 )
 
 # Link 'state' to root app to use HTTPClient inside API versions
@@ -77,11 +79,4 @@ app.mount("/v2", app_v2, name="API version 2")
 
 @app.get("/", tags=["App"])
 async def root():
-    return {
-        "message": "API Gateway",
-        "documentation": {
-            "v1": "/v1/docs"
-        }
-    }
-
-
+    return {"message": "API Gateway", "documentation": {"v1": "/v1/docs"}}
