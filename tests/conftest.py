@@ -7,19 +7,37 @@ from fastapi.testclient import TestClient
 import respx
 from httpx import Response, AsyncClient
 from app.core.dependencies import get_http_client
+from dotenv import dotenv_values
+import os
+
+# Env mode
+mode = dotenv_values("envs/.env")
+env_mode = mode.get("ENV_MODE", "dev")
+
+# Path env file per environment
+env_file = f"{env_mode}.env"
+config = {}
+
+# validate if 'env_file existe'
+if os.path.exists(f"envs/{env_file}"):
+    # Load env variables
+    config = dotenv_values(f"envs/{env_file}")
+else:
+    raise FileNotFoundError(f"Environment file {env_file} not found.")
 
 # Connection settings
-USER = 'admin'
-PASS = '10102025!'
-HOST = '127.0.0.1'
-PORT = '5432'
-DB = "take_home_challenge_test"
-IS_TEST_ENV = True
-POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon/"
+USER = config.get('DB_USER') #'admin'
+PASS = config.get('DB_PASS') #'10102025!'
+HOST = config.get('DB_HOST') #'127.0.0.1'
+PORT = config.get('DB_PORT') #'5432'
+DB_NAME = config.get('DB_NAME') #'take_home_challenge'
+IS_TEST_ENV = config.get('IS_TEST_ENV') #True
+POKEMON_API_URL = config.get('POKEMON_API_URL') #"https://pokeapi.co/api/v2/pokemon/"
 
 # Manage Dev/Prod DB Test
-if IS_TEST_ENV:
-    SQLARCHEMY_DATABASE_URL = "sqlite:///"+DB+".db"
+if IS_TEST_ENV == 'true':
+    SQLARCHEMY_DATABASE_URL = "sqlite:///"+DB_NAME+"_test.db" # sufix '_test.db' is to isolate the database from original 
+    print(f"SQLARCHEMY_DATABASE_URL: {SQLARCHEMY_DATABASE_URL}")
 else:
     URL.create(
         drivername="postgresql",

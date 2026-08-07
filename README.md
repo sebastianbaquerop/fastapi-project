@@ -40,7 +40,7 @@ Steps:
    **Nota: Improvement to valida if the database exist and the tables exist ✅
 6. External Dependencies (Pokemon APIs) ✅
 7. Testing 
-   - Best practices:
+   - Best practices: ✅
      - Tests shoud be isolated
      - Tests should be independents
      - Tests should berepeatable 
@@ -49,7 +49,7 @@ Steps:
      - Tests should be a part of the commit and build process
      - Tests should use single 'assert' per test
      - Tests should use fake data/database
-   - Recomendations:
+   - Recomendations: ✅
      - Use Dependency Injections
      - Use Pytest because it is a python test framework than enhance the testing practice.
      - Key amongs: 
@@ -62,28 +62,32 @@ Steps:
    - Set up:
      - DB Testing ✅
      - Mock DTOs ✅
-     - Mock External Dependencies (E.g. Pokemon API) 
+     - Mock External Dependencies (E.g. Pokemon API) ✅
        - If you use 'httpx' library you should use 'respx' to mock aysnc API calls
-   - Unit Test
-     -  ```pytest -v tests/integrations/v2/users_tests.py``` To show high level results
-     -  ```pytest -vv integrations/v2/test_users_pokemons.py``` ó 
-      ```pytest -vv integrations/v1/test_users.py```  To show information differences
-     -   ```pytest -s tests/integrations/v2/users_tests.py``` # To show information by```print()``` 
+   - Integration Test ✅ (At the same level of 'app' folder)
+     - ```pytest tests/ ``` #It will execute 26 tests: 13 test of v1 and 13 tests of v2
+     -  ```pytest -v tests/``` To show high level results
+     -  ```pytest -vv integrations/``` To show information differences for debuggin
+     -   ```pytest -s tests/``` # To show information by```print()``` 
      -  Specific test with logs:
-     - ```pytest -s integrations/v2/test_users_pokemons.py::test_patch_user_un_processable_content```
+     - ```pytest -s tests/integrations/v2/test_users_pokemons.py::test_health```
      - Specific test without logs:
-     - ```pytest -v integrations/v2/test_users_pokemons.py::test_patch_user_un_processable_content```
-   - Integration Test
-   - Coverage:
-     - More than 80%
+     - ```pytest -v tests/integrations/v2/test_users_pokemons.py::test_health```
+   - Coverage: ✅
+     - 96%
      - instalation: pip install coverage
-     - execute coverage: coverage run
-       - Ex: ```coverage run -m pytest  tests/integrations/v2/test_users_pokemons.py``` ó ```coverage run -m pytest tests/integrations/v2/test_users_pokemons.py ``` ò ```coverage run -m pytest integrations/v1/test_users.py integrations/v2/test_users_pokemons.py```
-     - coverage report: ```coverage report -m``` 
-     - html report: ```coverage html```
-8. Env Variables
+     - execute coverage: 
+       - coverage run:
+         - Common use (At the same level of 'app' folder):
+           - Ex: ```coverage run -m pytest tests/```
+       - coverage report: ```coverage report -m``` 
+       - html report: ```coverage html``` #it will write html report to Wrote HTML report location ```htmlcov/index.html```
+8. Env Variables ✅
+   1. library ```pip install python-dotenv```
+   2. One env
+   3. Multiple envs
 9.  Deployed
-10. Ignore 
+10. Git ignore 
 11. Linter 
 12. Formatter 
 13. Dockerize all the project
