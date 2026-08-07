@@ -29,14 +29,18 @@ class UserService:
         user_dto = UserDTO.model_validate(user)
         return user_dto
 
-    def update_user(self, user_id: int, user_data: UserCreateDTO) -> Optional[UserDTO]:
+    def update_user(
+        self, user_id: int, user_data: UserCreateDTO
+    ) -> Optional[UserDTO]:
         user = self.repository.update(user_id, user_data)
         if not user:
             raise ValueError("There was an error")
         user_dto = UserDTO.model_validate(user)
         return user_dto
 
-    def patch_user(self, user_id: int, user_data: UserPatchDTO) -> Optional[UserDTO]:
+    def patch_user(
+        self, user_id: int, user_data: UserPatchDTO
+    ) -> Optional[UserDTO]:
         user = self.repository.patch(user_id, user_data)
         if not user:
             raise ValueError("There was an error")

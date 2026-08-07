@@ -25,7 +25,9 @@ class UserRepository:
     def get_by_id(self, user_id: str) -> Optional[Users]:
         return self.db.query(Users).filter(Users.id == user_id).first()
 
-    def update(self, user_id: int, user_data: UserCreateDTO) -> Optional[Users]:
+    def update(
+        self, user_id: int, user_data: UserCreateDTO
+    ) -> Optional[Users]:
         user = self.get_by_id(user_id)
         if not user:
             return None
@@ -37,7 +39,9 @@ class UserRepository:
         self.db.refresh(user)
         return user
 
-    def patch(self, user_id: int, user_data: UserPatchDTO) -> Optional[Users]:
+    def patch(
+        self, user_id: int, user_data: UserPatchDTO
+    ) -> Optional[Users]:
         user = self.get_by_id(user_id)
         if not user:
             return None

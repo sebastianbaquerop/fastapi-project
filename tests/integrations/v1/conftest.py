@@ -53,7 +53,9 @@ def user_dto_mock():
 # Response consolidated
 @pytest.fixture
 def get_user_info_by_id_response_success_mock(user_dto_mock: UserDTO):
-    return UserResponse(code=200, message="Data obtained", data=user_dto_mock)
+    return UserResponse(
+        code=200, message="Data obtained", data=user_dto_mock
+    )
 
 
 # ----- POST -----
@@ -73,7 +75,9 @@ def user_create_dto_mock():
 # Response:
 @pytest.fixture
 def post_users_response_success_mock(users_dto_mock: UserDTO):
-    return UserResponse(code=201, message="User created", data=users_dto_mock)
+    return UserResponse(
+        code=201, message="User created", data=users_dto_mock
+    )
 
 
 @pytest.fixture
@@ -97,7 +101,9 @@ def user_update_dto_mock():
 # Response:
 @pytest.fixture
 def put_users_response_success_mock(users_put_dto_mock: UserDTO):
-    return UserResponse(code=200, message="User info updated", data=users_put_dto_mock)
+    return UserResponse(
+        code=200, message="User info updated", data=users_put_dto_mock
+    )
 
 
 @pytest.fixture
