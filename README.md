@@ -86,14 +86,28 @@ Steps:
    1. library ```pip install python-dotenv```
    2. One env
    3. Multiple envs
-9.  Deployed
-10. Git ignore 
-11. Linter 
-12. Formatter 
-13. Dockerize all the project
-14. Readme 
-15. Deployement or Release
-16. Exercise
+9.  Git ignore ✅
+10. Linter 
+    1.  Ruff
+        1.  ```pip install ruff``` 
+        2.  ```ruff check``` # Lint all files in the current directory.
+            1.  Rules:
+                 1.   ```fixable = ["ALL"]``` # 
+                 2.   ```dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"``` # Allow unused variables when underscore-prefixed.
+11. Formatter
+    1.  Ruff
+        1.   ```pip install ruff``` 
+        2.   ```ruff format``` # Format all files in the current directory.
+        3.   Rules:
+             1.   ```quote-style = "double"``` # Like Black, use double quotes for strings.
+             2.   ```indent-style = "space"``` # Like Black, indent with spaces, rather than tabs.
+             3.   ```skip-magic-trailing-comma = false``` # Like Black, respect magic trailing commas.
+12. Dockerize all the project
+13. Readme 
+14. Deployement or Release
+15. Coveralls
+16. Circle CI
+17. Exercise
 
 
 Dependencies:
@@ -109,6 +123,7 @@ Dependencies:
 - pip install pytest
 - pip install coverage
 - pip install respx
+- pip install ruff
 
 Settings:
 - all the folder inside 'app' must have the file '__init__.py'
