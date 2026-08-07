@@ -2,6 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 import json
 
+
 def test_health(test_client, test_health_response):
     """Health Check DB with success"""
     # Arrange
@@ -12,6 +13,7 @@ def test_health(test_client, test_health_response):
     # Assert
     assert response.status_code == 200
     assert response.json() == data
+
 
 def test_get_user_value_error(
     test_client, mock_http_client, general_internal_server_error
@@ -40,6 +42,7 @@ def test_get_all_users_success_empty_registers(test_client):
     assert response.status_code == status_code
     assert len(response.json()["data"]) == len(data)
 
+
 def test_get_user_success_empty_register(test_client, general_error):
     """Test get error"""
     # Arrange
@@ -51,6 +54,7 @@ def test_get_user_success_empty_register(test_client, general_error):
     # Assert
     assert response.status_code == status_code
     assert response.json() == data
+
 
 def test_post_user_success(
     test_client, user_create_dto_mock, post_users_response_success_mock
@@ -67,6 +71,7 @@ def test_post_user_success(
         mock_response, sort_keys=True
     )
 
+
 def test_post_user_with_pokemons_error(test_client, user_create_dto_mock, post_error):
     """Test create user error"""
     # Arrange
@@ -79,6 +84,7 @@ def test_post_user_with_pokemons_error(test_client, user_create_dto_mock, post_e
     assert response.status_code == status_code
     assert response.json() == mock_error_response
 
+
 def test_get_user_by_id_success(test_client, get_user_info_by_id_response_success_mock):
     """Test to retrieve information of id user with success"""
     # Arrange
@@ -90,6 +96,7 @@ def test_get_user_by_id_success(test_client, get_user_info_by_id_response_succes
     # Assert
     assert response.status_code == status_code
     assert response.json() == data
+
 
 def test_put_success(
     test_client, user_update_dto_mock, put_users_response_success_mock
@@ -125,6 +132,7 @@ def test_put_user_error_un_processable_content(
     assert response.status_code == status_code
     assert response.json() == data
 
+
 def test_patch_user_success(
     test_client, patch_user_patch_dto_mock, patch_users_response_success_mock
 ):
@@ -144,6 +152,7 @@ def test_patch_user_success(
     assert response.status_code == status_code
     assert response_filtered == mock_response
 
+
 def test_patch_user_error_un_processable_content(
     test_client, patch_user_patch_dto_mock, general_error
 ):
@@ -159,6 +168,7 @@ def test_patch_user_error_un_processable_content(
     assert response.status_code == status_code
     assert response.json() == data
 
+
 def test_delete_user_success_empty_register(test_client, delete_success):
     """Test of deleting user with success"""
     # Arrange
@@ -170,6 +180,7 @@ def test_delete_user_success_empty_register(test_client, delete_success):
     # Assert
     assert response.status_code == status_code
     assert response.json() == data
+
 
 def test_delete_user_error(test_client, general_error):
     """Test of deleting user error"""

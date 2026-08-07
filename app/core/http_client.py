@@ -7,6 +7,7 @@ from tenacity import (
     retry_if_exception_type,
 )
 
+
 class HTTPClient:
     def __init__(self):
         self.client = httpx.AsyncClient(timeout=httpx.Timeout(5.0))

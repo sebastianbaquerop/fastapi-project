@@ -2,6 +2,7 @@ from app.db.models.base_model import Base
 from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime, timezone
 
+
 class Users(Base):
     __tablename__ = "users"  # Tells SQLAlchemy to create a table named "users"
 

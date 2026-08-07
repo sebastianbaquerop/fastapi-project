@@ -10,6 +10,7 @@ from app.schemas.pokemon_dto import PokemonsDTO
 from typing import Optional, List
 from app.core.http_client import HTTPClient
 
+
 class UserAndPokemonService:
     def __init__(self, db_session: Session, http_client: HTTPClient):
         self.repository = UserAndPokemonRepository(db_session)

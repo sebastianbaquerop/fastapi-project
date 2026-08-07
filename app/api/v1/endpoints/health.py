@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 router = APIRouter(tags=["Health"])
 
+
 @router.get("/health", status_code=status.HTTP_200_OK)
 async def health_check(db: Session = Depends(get_db)):
     try:

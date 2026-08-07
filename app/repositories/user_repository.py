@@ -4,6 +4,7 @@ from app.schemas.user_dto import UserCreateDTO, UserPatchDTO
 from app.db.models.users import Users
 from datetime import datetime, timezone
 
+
 class UserRepository:
     def __init__(self, db: Session):
         self.db = db

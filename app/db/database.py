@@ -58,6 +58,7 @@ def init_db():
         bind=engine
     )  # Generate the schemas at once in our target SQLite/Postgres database
 
+
 def get_db():
     db = SessionLocal()
     try:

@@ -15,6 +15,7 @@ from app.core.dependencies import get_http_client
 
 router = APIRouter(tags=["Users"])
 
+
 @router.get(
     "/users/",
     summary="Get all users",
@@ -34,6 +35,7 @@ async def get_users(db: Session = Depends(get_db), client=Depends(get_http_clien
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
         )
+
 
 @router.get(
     "/users/{id}",
@@ -58,6 +60,7 @@ async def get_users_by_id(
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
+
 @router.post(
     "/users",
     summary="Create user",
@@ -81,6 +84,7 @@ async def add_user(
 
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
 
 @router.put(
     "/users/{id}",
@@ -107,6 +111,7 @@ async def update_user(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=str(e)
         )
 
+
 @router.patch(
     "/users/{id}",
     summary="Update some user info",
@@ -131,6 +136,7 @@ async def update_user(
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=str(e)
         )
+
 
 @router.delete(
     "/users/{id}",

@@ -59,6 +59,7 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 # Create table in the database
 Base.metadata.create_all(bind=engine)
 
+
 @pytest.fixture(scope="function")
 def get_db():
     """Create a new database session with a rollback at the end of the test"""
@@ -69,6 +70,7 @@ def get_db():
     session.close()
     transaction.rollback()
     connection.close()
+
 
 @pytest.fixture
 def test_client(get_db):
@@ -86,6 +88,7 @@ def test_client(get_db):
 
     app.dependency_overrides.clear()
 
+
 @pytest.fixture
 def test_health_response():
     """Health check response"""
@@ -96,6 +99,7 @@ def test_health_response():
             "schemas": "Tables are already presented in the database",
         },
     }
+
 
 @pytest.mark.asyncio
 @respx.mock
@@ -111,6 +115,7 @@ async def get_pokemon_data_mock():
         )
     )
 
+
 @pytest.mark.asyncio
 @respx.mock
 async def get_pokemon_data_error_mock(pokemon_id: int):
@@ -118,6 +123,7 @@ async def get_pokemon_data_error_mock(pokemon_id: int):
     respx.get(POKEMON_API_URL + pokemon_id).mock(
         return_value=Response(status_code=500, json={"error": "Server error"})
     )
+
 
 @pytest.fixture
 def mock_http_client():

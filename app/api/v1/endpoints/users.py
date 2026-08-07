@@ -13,6 +13,7 @@ from app.services.user_service import UserService
 
 router = APIRouter(tags=["Users"])
 
+
 @router.get(
     "/users/",
     summary="Get all users",
@@ -32,6 +33,7 @@ async def get_users(db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
         )
+
 
 @router.get(
     "/users/{id}",
@@ -54,6 +56,7 @@ async def get_users_by_id(id: int, db: Session = Depends(get_db)):
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
+
 @router.post(
     "/users",
     summary="Create user",
@@ -73,6 +76,7 @@ async def add_user(user_data: UserCreateDTO, db: Session = Depends(get_db)):
 
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
 
 @router.put(
     "/users/{id}",
@@ -94,6 +98,7 @@ async def update_user(id: int, user: UserUpdateDTO, db: Session = Depends(get_db
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=str(e)
         )
 
+
 @router.patch(
     "/users/{id}",
     summary="Update some user info",
@@ -113,6 +118,7 @@ async def update_user(id: int, user_data: UserPatchDTO, db: Session = Depends(ge
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=str(e)
         )
+
 
 @router.delete(
     "/users/{id}",

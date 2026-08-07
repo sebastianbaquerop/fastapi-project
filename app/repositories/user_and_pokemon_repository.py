@@ -7,6 +7,7 @@ from app.schemas.user_and_pokemon_dto import (
 from app.db.models.users_and_pokemons import UsersAndPokemons
 from datetime import datetime, timezone
 
+
 class UserAndPokemonRepository:
     def __init__(self, db: Session):
         self.db = db

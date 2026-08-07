@@ -4,6 +4,7 @@ from app.api.v2 import routes as v2_router
 from contextlib import asynccontextmanager
 from app.core.http_client import HTTPClient
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: Create Singleton
@@ -18,6 +19,7 @@ async def lifespan(app: FastAPI):
     print("Closing HTTP Client...")
     yield
     await app.state.http_client.close()
+
 
 # Root App (Gateway) - Lifespan attached HERE
 app = FastAPI(

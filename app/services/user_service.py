@@ -3,6 +3,7 @@ from app.repositories.user_repository import UserRepository
 from app.schemas.user_dto import UserCreateDTO, UserDTO, UserPatchDTO
 from typing import Optional, List
 
+
 class UserService:
     def __init__(self, db_session: Session):
         self.repository = UserRepository(db_session)

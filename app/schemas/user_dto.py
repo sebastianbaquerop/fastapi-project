@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr, ConfigDict
 from typing import Optional, List
 from datetime import datetime, timezone
 
+
 class UserDTO(BaseModel):
     id: int
     name: str
@@ -15,6 +16,7 @@ class UserDTO(BaseModel):
         from_attributes=True
     )  # Enable reading objects from SQLAlchemy ORM
 
+
 class UserCreateDTO(BaseModel):
     name: str
     email: EmailStr
@@ -27,6 +29,7 @@ class UserCreateDTO(BaseModel):
         from_attributes=True
     )  # Enable reading objects from SQLAlchemy ORM
 
+
 class UserUpdateDTO(BaseModel):
     name: str
     email: EmailStr
@@ -35,6 +38,7 @@ class UserUpdateDTO(BaseModel):
     created_at: Optional[datetime] = datetime.now((timezone.utc))
     updated_at: Optional[datetime] = datetime.now((timezone.utc))
 
+
 class UserPatchDTO(BaseModel):
     name: Optional[str] = None
     email: Optional[EmailStr] = None
@@ -42,6 +46,7 @@ class UserPatchDTO(BaseModel):
     hashed_password: Optional[str] = None
     created_at: Optional[datetime] = datetime.now((timezone.utc))
     updated_at: Optional[datetime] = datetime.now((timezone.utc))
+
 
 class UserResponse(BaseModel):
     code: int

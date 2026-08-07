@@ -3,6 +3,7 @@ from typing import Optional, List
 from datetime import datetime, timezone
 from app.schemas.pokemon_dto import PokemonsDTO
 
+
 class UsersAndPokemonsDTO(BaseModel):
     id: int
     name: str
@@ -16,6 +17,7 @@ class UsersAndPokemonsDTO(BaseModel):
     model_config = ConfigDict(
         from_attributes=True
     )  # Enable reading objects from SQLAlchemy ORM
+
 
 class UserAndPokemonsDTO(BaseModel):
     id: int
@@ -32,6 +34,7 @@ class UserAndPokemonsDTO(BaseModel):
         from_attributes=True
     )  # Enable reading objects from SQLAlchemy ORM
 
+
 class UserAndPokemonsCreateDTO(BaseModel):
     name: str
     email: EmailStr
@@ -45,6 +48,7 @@ class UserAndPokemonsCreateDTO(BaseModel):
         from_attributes=True
     )  # Enable reading objects from SQLAlchemy ORM
 
+
 class UserAndPokemonsUpdateDTO(BaseModel):
     name: str
     email: EmailStr
@@ -53,6 +57,7 @@ class UserAndPokemonsUpdateDTO(BaseModel):
     pokemon_ids: list[int]
     created_at: Optional[datetime] = datetime.now((timezone.utc))
     updated_at: Optional[datetime] = datetime.now((timezone.utc))
+
 
 class UserAndPokemonsPatchDTO(BaseModel):
     name: Optional[str] = None
@@ -63,15 +68,18 @@ class UserAndPokemonsPatchDTO(BaseModel):
     created_at: Optional[datetime] = datetime.now((timezone.utc))
     updated_at: Optional[datetime] = datetime.now((timezone.utc))
 
+
 class UsersAndPokemonsResponse(BaseModel):
     code: int
     message: str
     data: UsersAndPokemonsDTO
 
+
 class UserAndPokemonsInfoResponse(BaseModel):
     code: int
     message: str
     data: UserAndPokemonsDTO
+
 
 class UsersAndPokemonsResponseList(BaseModel):
     code: int
