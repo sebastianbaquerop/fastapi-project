@@ -1,6 +1,7 @@
 from fastapi import Request
 from app.core.http_client import HTTPClient
 
+
 async def get_http_client(request: Request) -> HTTPClient:
     """
     Injects the shared HTTP client from app.state.

@@ -25,7 +25,7 @@ app = FastAPI(
     description="Select a version below or visit /docs/v1, /docs/v2",
     docs_url=None,
     openapi_url=None,
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 # API v1
@@ -43,7 +43,7 @@ app_v1 = FastAPI(
     license_info={
         "name": "MIT License",
         "url": "https://opensource.org/licenses/MIT",
-    }
+    },
 )
 
 # API v2
@@ -61,7 +61,7 @@ app_v2 = FastAPI(
     license_info={
         "name": "MIT License",
         "url": "https://opensource.org/licenses/MIT",
-    }
+    },
 )
 
 # Link 'state' to root app to use HTTPClient inside API versions
@@ -77,11 +77,4 @@ app.mount("/v2", app_v2, name="API version 2")
 
 @app.get("/", tags=["App"])
 async def root():
-    return {
-        "message": "API Gateway",
-        "documentation": {
-            "v1": "/v1/docs"
-        }
-    }
-
-
+    return {"message": "API Gateway", "documentation": {"v1": "/v1/docs"}}

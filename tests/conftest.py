@@ -26,17 +26,19 @@ else:
     raise FileNotFoundError(f"Environment file {env_file} not found.")
 
 # Connection settings
-USER = config.get('DB_USER') #'admin'
-PASS = config.get('DB_PASS') #'10102025!'
-HOST = config.get('DB_HOST') #'127.0.0.1'
-PORT = config.get('DB_PORT') #'5432'
-DB_NAME = config.get('DB_NAME') #'take_home_challenge'
-IS_TEST_ENV = config.get('IS_TEST_ENV') #True
-POKEMON_API_URL = config.get('POKEMON_API_URL') #"https://pokeapi.co/api/v2/pokemon/"
+USER = config.get("DB_USER")  #'admin'
+PASS = config.get("DB_PASS")  #'10102025!'
+HOST = config.get("DB_HOST")  #'127.0.0.1'
+PORT = config.get("DB_PORT")  #'5432'
+DB_NAME = config.get("DB_NAME")  #'take_home_challenge'
+IS_TEST_ENV = config.get("IS_TEST_ENV")  # True
+POKEMON_API_URL = config.get("POKEMON_API_URL")  # "https://pokeapi.co/api/v2/pokemon/"
 
 # Manage Dev/Prod DB Test
-if IS_TEST_ENV == 'true':
-    SQLARCHEMY_DATABASE_URL = "sqlite:///"+DB_NAME+"_test.db" # sufix '_test.db' is to isolate the database from original 
+if IS_TEST_ENV == "true":
+    SQLARCHEMY_DATABASE_URL = (
+        "sqlite:///" + DB_NAME + "_test.db"
+    )  # sufix '_test.db' is to isolate the database from original
     print(f"SQLARCHEMY_DATABASE_URL: {SQLARCHEMY_DATABASE_URL}")
 else:
     URL.create(
@@ -45,7 +47,7 @@ else:
         password=PASS,
         host=HOST,
         port=PORT,
-        database=DB
+        database=DB_NAME,
     )
 
 # Create DB engine
@@ -71,62 +73,60 @@ def get_db():
 @pytest.fixture
 def test_client(get_db):
     """Create a test client that uses the overrride 'get_db' fixture to return a session."""
+
     def override_get_db():
         try:
             yield get_db
         finally:
             get_db.close()
-    
+
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as test_client:
         yield test_client
-    
+
     app.dependency_overrides.clear()
 
 @pytest.fixture
 def test_health_response():
     """Health check response"""
     return {
-    "code": 200,
-    "info": {
-    "health": "healthy",
-    "schemas": "Tables are already presented in the database"
+        "code": 200,
+        "info": {
+            "health": "healthy",
+            "schemas": "Tables are already presented in the database",
+        },
     }
-  }
 
 @pytest.mark.asyncio
 @respx.mock
 async def get_pokemon_data_mock():
     """Mock Pokemon API Call"""
-    respx.get(POKEMON_API_URL+"1").mock(
+    respx.get(POKEMON_API_URL + "1").mock(
         return_value=Response(
             status_code=200,
             json={
-            "id": 1, # id is a field of the Pokemon API response
-            "name": "name"  # name is a field of the Pokemon API response
-            }
+                "id": 1,  # id is a field of the Pokemon API response
+                "name": "name",  # name is a field of the Pokemon API response
+            },
         )
-    )   
+    )
 
 @pytest.mark.asyncio
 @respx.mock
 async def get_pokemon_data_error_mock(pokemon_id: int):
     """Mock Pokemon API Call"""
-    respx.get(POKEMON_API_URL+pokemon_id).mock(
-        return_value=Response(
-            status_code=500,
-            json={
-            "error": "Server error" 
-            }
-        )
+    respx.get(POKEMON_API_URL + pokemon_id).mock(
+        return_value=Response(status_code=500, json={"error": "Server error"})
     )
 
 @pytest.fixture
 def mock_http_client():
     with respx.mock as router:
+
         async def override_get_http_client():
             async with AsyncClient() as client:
                 yield client
+
         app.dependency_overrides[get_http_client] = override_get_http_client
         yield router
         app.dependency_overrides.clear()

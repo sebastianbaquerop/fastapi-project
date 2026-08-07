@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status,HTTPException
+from fastapi import APIRouter, Depends, status, HTTPException
 from app.db.database import get_db, init_db
 from sqlalchemy import text, inspect
 from sqlalchemy.orm import Session
@@ -9,7 +9,7 @@ router = APIRouter(tags=["Health"])
 async def health_check(db: Session = Depends(get_db)):
     try:
         response = {}
-        stmt = text('Select 1')
+        stmt = text("Select 1")
         db_state = db.execute(stmt)
         if db_state:
             response["health"] = "healthy"
@@ -18,11 +18,13 @@ async def health_check(db: Session = Depends(get_db)):
         # Create inspector and check
         inspector = inspect(connection)
         print(f"inspector.has_table('users'): {inspector.has_table('users')}")
-        if not inspector.has_table('users'):
+        if not inspector.has_table("users"):
             init_db()
             print('table "users" were created in the database')
             response["schemas"] = "Tables schemas were created in the database"
-        print(f"inspector.has_table('users_and_pokemons'): {inspector.has_table('users_and_pokemons')}")
+        print(
+            f"inspector.has_table('users_and_pokemons'): {inspector.has_table('users_and_pokemons')}"
+        )
         if not inspector.has_table("users_and_pokemons"):
             init_db()
             print('table "users_and_pokemons" were created in the database')
@@ -32,11 +34,6 @@ async def health_check(db: Session = Depends(get_db)):
 
     except Exception as e:
         db = f"unhealthy: {str(e)}"
-        raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail=db) 
-        
-    return {
-        "code": status.HTTP_200_OK,
-        "info": response
-    }
+        raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail=db)
+
+    return {"code": status.HTTP_200_OK, "info": response}
