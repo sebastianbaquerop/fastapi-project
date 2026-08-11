@@ -137,11 +137,20 @@ Steps:
        1. Detached Mode:
        Run the container in the background using the -d flag. This allows you to continue using your terminal while the container runs ```docker run -d image_name:tag```
        2. Interactive Mode: Use the -it flags to run the container and attach your terminal to it, allowing you to interact with the shell inside the container ```docker run -it image-name:tag /bin/bash```
-13. Readme
-14. . Deployement or Release
-15. Coveralls
-16. Circle CI
-17. Exercise
+13. Docker Compose (API and DB):
+    1. Docker compose file
+    2. Run docker compose file:
+       1. Build docker compose:
+        ```docker-compose build```
+       2. Run application:
+        ```docker-compose up```
+       3. Stop and remove container:
+        ```docker-compose down```  
+14. Readme
+15. . Deployement or Release
+16. Coveralls
+17. Circle CI
+18. Exercise
 
 Dependencies:
 
