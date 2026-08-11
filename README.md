@@ -130,7 +130,13 @@ Steps:
 
         3. Check format:
              ```ruff format``` # Format all files in the current directory.
-12. Dockerize all the project
+12. Dockerize API project
+    1. Dockerfile
+    2. Create docker image: ```docker build -t image-name:tag .```
+    3. Run docker image:
+       1. Detached Mode:
+       Run the container in the background using the -d flag. This allows you to continue using your terminal while the container runs ```docker run -d image_name:tag```
+       2. Interactive Mode: Use the -it flags to run the container and attach your terminal to it, allowing you to interact with the shell inside the container ```docker run -it image-name:tag /bin/bash```
 13. Readme
 14. . Deployement or Release
 15. Coveralls
