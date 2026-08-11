@@ -22,6 +22,7 @@ Version 2:
 
 ## Tables
 
+```Pending```
 
 ## Author
 
@@ -95,15 +96,15 @@ coverage:
 
 ## Run APP
 
-PENDIND
+```Pending```
 
 ## Run Tests
 
-PENDIND
+```Pending```
 
 ## Precommit hooks
 
-PENDIND
+```Pending```
 
 ```precommit install```
 
@@ -144,7 +145,6 @@ jobs:
 ##  Deployment
 
 The code coverage is sent to coveralls and in that site the test coverage can be reviewed in detail.
-
 
 ## Content
 
@@ -291,14 +291,14 @@ Steps:
         3. Check format:
              ```ruff format``` # Format all files in the current directory.
 13. Requirements ✅
-14. Dockerize API project
+14. Dockerize API project ✅
     1. Dockerfile
     2. Create docker image: ```docker build -t image-name:tag .```
     3. Run docker image:
        1. Detached Mode:
        Run the container in the background using the -d flag. This allows you to continue using your terminal while the container runs ```docker run -d image_name:tag```
        2. Interactive Mode: Use the -it flags to run the container and attach your terminal to it, allowing you to interact with the shell inside the container ```docker run -it image-name:tag /bin/bash```
-15. Docker Compose (API and DB):
+15. Docker Compose (API and DB): ✅
     1. Docker compose file
     2. Run docker compose file:
        1. Build docker compose:
@@ -307,7 +307,7 @@ Steps:
         ```docker-compose up```
        3. Stop and remove container:
         ```docker-compose down```  
-16. Readme
+16. Readme ✅
 17. Deployement or Release
 18. Coveralls
 19. Circle CI
@@ -330,20 +330,22 @@ Dependencies:
   pip install ruff
 ```
 
-Settings:
+## Settings
 
 - all the folder inside 'app' must have the file '__init__.py'
 - pyproject.toml set the following:
-´´´
+
+```ruby
 [tool.fastapi]
 entrypoint = "app.main:app"
-´´´
+```
+
 - to run the application you cursor on terminal will be inside folder project an execute the fastapi command:
 ```fastapi dev```
 or the contrary
 ```fastapi dev app.main```
 
-- Recomendations:
+## Recomendations
 
 1. Review carefully the data base models inside 'db/models' folder
 2. Load database and create table firstly by code 'Base.metadata.create_all(bind=engine)'
