@@ -8,8 +8,9 @@
    - schemas/ #Pydantic models (DTOs - Requests & Responses) ✅
    - services/ # Business logic and external api calls ✅
    - test/ #Test Features (Integration Test, Unit Test)
-   - requirements.txt # Dependencies pip install -r requirements.txt
-   - .env # Secrets
+   - requirements.txt # To generate dependencies on this file you have to run:  ```pip freeze > requirements.txt``` ✅
+   - envs # Environment folder ✅
+   - .env # Environment files with secrets and variables per environment ✅
    - config.py # Environment variables
 2. APIs
    - Users ✅
