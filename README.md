@@ -1,6 +1,165 @@
 # FastAPI Project
 
-1. Scaffold
+Description
+
+## Features
+
+Version 1:
+
+- Create new Users
+- Get Users list
+- Get User detail by Id
+- Update User
+- Delete User
+
+Version 2:
+
+- Create new Users with their Pokemon Ids
+- Get Users list
+- Get User detail by Id and also gathering Pokemon Names from Poke API
+- Update User
+- Delete User
+
+## Tables
+
+
+## Author
+
+Sebastián Baquero
+
+- GitHub: <https://github.com/sebastianbaquerop/>
+- Website: <https://sebastianbaquero.com>
+- LinkedIn: <https://www.linkedin.com/in/sbaquero/>
+
+## Badges
+
+build:
+
+coverage:
+
+## Table of contents
+
+| Content                           | Completed |
+| --------------------------------- | --------- |
+| 1. Clean Architecture             | Yes       |
+| 2. APIs                           | Yes       |
+| 3. Versioning                     | Yes       |
+| 4. Swagger                        | Yes       |
+| 5. Database                       | Yes       |
+| 6. DTOs and Schemas               | Yes       |
+| 7. Business Logic                 | Yes       |
+| 8. Docker & Docker Compose (DB)   | Yes       |
+| 9. External Dependencias          | Yes       |
+| 10. Testing                       | Yes       |
+| 11. Coverage                      | Yes       |
+| 12. Environments Variables        | Yes       |
+| 13. Not track files               | Yes       |
+| 14. Lintter                       | Yes       |
+| 15. Formmatter                    | Yes       |
+| 16. Docker & Docker Compose (APP) | No        |
+| 17. Readme                        | No        |
+| 1X. Deployment/Release            | No        |
+| 1X. Circle CI                     | No        |
+| 1X. Coveralls                     | No        |
+| 1X. Dependencies                  | No        |
+| 1X. Settings                      | Yes       |
+| 1X. Recomendations                | Yes       |
+
+## Technology
+
+- Programming Language: ```Python 3```
+- App Framework: ```FastAPI```
+- API Framework: ```FastAPI```
+- Containers: ```Docker, Docker-Compose```
+- Web-server: ```Undefined```
+- Deployment: ```Coveralls and Travis(Circle CI)```
+
+## Routes
+
+- API Swagger:
+  - Version 1: <http://127.0.0.1:8000/v1/docs>
+  - Version 2: <http://127.0.0.1:8000/v2/docs>
+- API Users:
+  - Version 1: <http://127.0.0.1:8000/v1/users>
+  - Version 2: <http://127.0.0.1:8000/v2/users>
+- API Health:
+  - Version 1: <http://127.0.0.1:8000/v1/health>
+  - Version 2: <http://127.0.0.1:8000/v2/health>
+
+## Pre-requisites
+
+- Linux/Mac terminal
+- Python
+- Docker and Docker compose installed
+- No services running on localhost port 8000
+
+## Run APP
+
+PENDIND
+
+## Run Tests
+
+PENDIND
+
+## Precommit hooks
+
+PENDIND
+
+```precommit install```
+
+This will trigger black formatter and ruff linter. If code is not align with ruff standard the commit will fail.
+
+## Standars Applied
+
+- Flake8
+- Black
+- Isort
+- Pyupgrade
+
+## CI/CD Integration
+
+Github actions:
+
+```yml
+
+name: Lint and Format
+
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # review
+      - uses: actions/setup-python@v4 #review
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install ruff
+      - name: Lint with ruff
+        run: ruff check .
+      - name: Format with ruff
+        run: ruff format --check .
+```
+
+##  Deployment
+
+The code coverage is sent to coveralls and in that site the test coverage can be reviewed in detail.
+
+
+## Content
+
+1. Clean Architecure (Scaffold)
+   - api/ # API endpoints (GET, POST, PATCH, PUT, DELETE) ✅
+   - core/ (call external APIs, configs, security) ✅
+   - db/ (Tables Models) ✅
+   - repositories/ (behavior to database) ✅
+   - schemas/ #Pydantic models (DTOs - Requests & Responses) ✅
+   - services/ # Business logic and external api calls ✅
+   - test/ #Test Features (Integration Test, Unit Test)
+   - requirements.txt # To generate dependencies on this file you have to run:  ```pip freeze > requirements.txt``` ✅
+   - envs # Environment folder ✅
+   - .env # Environment files with secrets and variables per environment ✅
+
    - api/ # API endpoints (GET, POST, PATCH, PUT, DELETE) ✅
    - core/ (call external APIs, configs, security) ✅
    - db/ (Tables Models) ✅
@@ -75,7 +234,7 @@ Steps:
      - ```pytest -s tests/integrations/v2/test_users_pokemons.py::test_health```
      - Specific test without logs:
      - ```pytest -v tests/integrations/v2/test_users_pokemons.py::test_health```
-   - Coverage: ✅
+8. Coverage: ✅
      - 96%
      - instalation: pip install coverage
      - execute coverage:
@@ -84,12 +243,12 @@ Steps:
            - Ex: ```coverage run -m pytest tests/```
        - coverage report: ```coverage report -m```
        - html report: ```coverage html``` #it will write html report to Wrote HTML report location ```htmlcov/index.html```
-8. Env Variables ✅
+9. Env Variables ✅
    1. library ```pip install python-dotenv```
    2. One env
    3. Multiple envs
-9. Git ignore ✅
-10. Linter
+10. Git ignore ✅
+11. Linter ✅
     1. Ruff
         1. Installation:
            ```pip install ruff```
@@ -116,7 +275,7 @@ Steps:
 
         3. Check rules:
           ```ruff check``` # Lint all files in the current directory.
-11. Formatter ✅
+12. Formatter ✅
     1. Ruff
         1. Instalation:
             ```pip install ruff```
@@ -131,14 +290,15 @@ Steps:
 
         3. Check format:
              ```ruff format``` # Format all files in the current directory.
-12. Dockerize API project
+13. Requirements ✅
+14. Dockerize API project
     1. Dockerfile
     2. Create docker image: ```docker build -t image-name:tag .```
     3. Run docker image:
        1. Detached Mode:
        Run the container in the background using the -d flag. This allows you to continue using your terminal while the container runs ```docker run -d image_name:tag```
        2. Interactive Mode: Use the -it flags to run the container and attach your terminal to it, allowing you to interact with the shell inside the container ```docker run -it image-name:tag /bin/bash```
-13. Docker Compose (API and DB):
+15. Docker Compose (API and DB):
     1. Docker compose file
     2. Run docker compose file:
        1. Build docker compose:
@@ -147,11 +307,10 @@ Steps:
         ```docker-compose up```
        3. Stop and remove container:
         ```docker-compose down```  
-14. Readme
-15. . Deployement or Release
-16. Coveralls
-17. Circle CI
-18. Exercise
+16. Readme
+17. Deployement or Release
+18. Coveralls
+19. Circle CI
 
 Dependencies:
 
