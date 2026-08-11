@@ -1,14 +1,15 @@
+import os
+
 import pytest
+import respx
+from dotenv import dotenv_values
+from fastapi.testclient import TestClient
+from httpx import Response, AsyncClient
 from sqlalchemy import URL, create_engine
 from sqlalchemy.orm import sessionmaker
+from app.core.dependencies import get_http_client
 from app.db.models.base_model import Base
 from app.main import app
-from fastapi.testclient import TestClient
-import respx
-from httpx import Response, AsyncClient
-from app.core.dependencies import get_http_client
-from dotenv import dotenv_values
-import os
 
 # Env mode
 mode = dotenv_values("envs/.env")
@@ -66,7 +67,7 @@ Base.metadata.create_all(bind=engine)
 
 @pytest.fixture(scope="function")
 def get_db():
-    """Create a new database session with a rollback at the end of the test"""
+    """Create a new database session with rollback at the end of the test"""
     connection = engine.connect()
     transaction = connection.begin()
     session = TestingSessionLocal(bind=connection)
@@ -78,7 +79,7 @@ def get_db():
 
 @pytest.fixture
 def test_client(get_db):
-    """Create a test client that uses the overrride 'get_db' fixture to return a session."""
+    """Create a test client that uses the overrride 'get_db' fixture to return session."""
 
     def override_get_db():
         try:
@@ -113,8 +114,8 @@ async def get_pokemon_data_mock():
         return_value=Response(
             status_code=200,
             json={
-                "id": 1,  # id is a field of the Pokemon API response
-                "name": "name",  # name is a field of the Pokemon API response
+                "id": 1,  # field of the Pokemon API response
+                "name": "name",  # field of the Pokemon API response
             },
         )
     )

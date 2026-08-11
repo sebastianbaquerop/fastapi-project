@@ -1,6 +1,7 @@
+import json
+
 import pytest
 from fastapi.testclient import TestClient
-import json
 
 
 def test_health(test_client, test_health_response):
@@ -11,7 +12,7 @@ def test_health(test_client, test_health_response):
     # Act
     response = test_client.get("/v1/health")
     # Assert
-    assert response.status_code == 200
+    assert response.status_code == status_code
     assert response.json() == data
 
 

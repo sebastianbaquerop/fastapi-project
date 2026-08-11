@@ -1,16 +1,18 @@
+from typing import List
+
 import pytest
+
+from app.schemas.pokemon_dto import PokemonsDTO
 from app.schemas.user_and_pokemon_dto import (
-    UsersAndPokemonsDTO,
-    UserAndPokemonsDTO,
     UserAndPokemonsCreateDTO,
-    UserAndPokemonsUpdateDTO,
-    UserAndPokemonsPatchDTO,
-    UsersAndPokemonsResponse,
+    UserAndPokemonsDTO,
     UserAndPokemonsInfoResponse,
+    UserAndPokemonsPatchDTO,
+    UserAndPokemonsUpdateDTO,
+    UsersAndPokemonsDTO,
+    UsersAndPokemonsResponse,
     UsersAndPokemonsResponseList,
 )
-from typing import List
-from app.schemas.pokemon_dto import PokemonsDTO
 
 
 # ----- GET -----

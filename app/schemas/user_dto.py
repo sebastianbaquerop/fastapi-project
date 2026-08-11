@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
-from typing import Optional, List
+from typing import List, Optional
+
+from pydantic import BaseModel, ConfigDict, EmailStr
 from datetime import datetime, timezone
 
 
@@ -9,8 +10,8 @@ class UserDTO(BaseModel):
     email: EmailStr
     role: str
     hashed_password: str
-    created_at: Optional[datetime] = datetime.now((timezone.utc))
-    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now(timezone.utc)
+    updated_at: Optional[datetime] = datetime.now(timezone.utc)
 
     model_config = ConfigDict(
         from_attributes=True
@@ -22,8 +23,8 @@ class UserCreateDTO(BaseModel):
     email: EmailStr
     role: str
     hashed_password: str
-    created_at: Optional[datetime] = datetime.now((timezone.utc))
-    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now(timezone.utc)
+    updated_at: Optional[datetime] = datetime.now(timezone.utc)
 
     model_config = ConfigDict(
         from_attributes=True
@@ -35,8 +36,8 @@ class UserUpdateDTO(BaseModel):
     email: EmailStr
     role: str
     hashed_password: str
-    created_at: Optional[datetime] = datetime.now((timezone.utc))
-    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now(timezone.utc)
+    updated_at: Optional[datetime] = datetime.now(timezone.utc)
 
 
 class UserPatchDTO(BaseModel):
@@ -44,8 +45,8 @@ class UserPatchDTO(BaseModel):
     email: Optional[EmailStr] = None
     role: Optional[str] = None
     hashed_password: Optional[str] = None
-    created_at: Optional[datetime] = datetime.now((timezone.utc))
-    updated_at: Optional[datetime] = datetime.now((timezone.utc))
+    created_at: Optional[datetime] = datetime.now(timezone.utc)
+    updated_at: Optional[datetime] = datetime.now(timezone.utc)
 
 
 class UserResponse(BaseModel):

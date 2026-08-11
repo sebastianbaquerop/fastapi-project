@@ -1,11 +1,11 @@
 import pytest
 from app.schemas.user_dto import (
-    UserDTO,
-    UsersResponse,
-    UserResponse,
     UserCreateDTO,
-    UserUpdateDTO,
+    UserDTO,
     UserPatchDTO,
+    UserResponse,
+    UsersResponse,
+    UserUpdateDTO,
 )
 from typing import List
 
