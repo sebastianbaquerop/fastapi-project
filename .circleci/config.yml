@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  coveralls: coveralls/coveralls@2.2.5
+
 jobs:
   build_and_test:
     docker:
@@ -27,16 +30,12 @@ jobs:
           command: coverage report -m
           
       - run:
-          name: Generate HTML Report 
-          command: coverage html
+          name: Generate XML for Coveralls 
+          command: coverage xml
 
-      - run:
-          name: Upload Data to Coveralls
-          # This tool looks for the .coverage file automatically
-          command: coveralls 
-      - run:
-          name: Coveralls
-          command: coveralls
+      - coveralls/upload:
+          coverage_file: ./coverage.xml
+          coverage_format: cobertura  # Explicitly tells the orb to read Python's XML data
 
 workflows:
   build_test_deploy:
