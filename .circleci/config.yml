@@ -1,0 +1,28 @@
+version: 2.1
+
+orb:
+  python: circleci/python@3.11
+
+jobs:
+  build_and_test:
+    executor:
+      name: python/default
+      tag: '3.11'
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Install virtual env
+          command: python3 -m venv .venv
+      - run:
+          name: Install dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: Integration Test
+          command: pytest
+
+workflows:
+  sample:
+    jobs:
+      - build_and_test
