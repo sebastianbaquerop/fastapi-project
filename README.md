@@ -34,7 +34,7 @@ Sebastián Baquero
 
 ## Badges
 
- Build: [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main)
 
 coverage:
 
