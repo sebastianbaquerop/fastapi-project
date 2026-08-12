@@ -36,8 +36,7 @@ Sebastián Baquero
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main)
 
-coverage:
-
+[![Coverage Status](https://coveralls.io/repos/github/sebastianbaquerop/fastapi-project/badge.svg)](https://coveralls.io/github/sebastianbaquerop/fastapi-project)
 
 ## Table of contents
 
@@ -352,8 +351,9 @@ Steps:
 17. Budge Circle CI ✅
     1. Folder ```.circleci/```
     2. Config file ```config.yml```
-18. Coveralls
+18. Coveralls ✅
 19. Deployement or Release
+20. ORM Migrations
 
 Dependencies:
 
