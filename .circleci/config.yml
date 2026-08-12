@@ -21,8 +21,3 @@ jobs:
       - run:
           name: Integration Test
           command: pytest
-
-workflows:
-  sample:
-    jobs:
-      - build_and_test
