@@ -44,7 +44,7 @@ if IS_TEST_ENV == "true":
     )  # sufix '_test.db' is to isolate the database from original
     print(f"SQLARCHEMY_DATABASE_URL: {SQLARCHEMY_DATABASE_URL}")
 else:
-    URL.create(
+    SQLARCHEMY_DATABASE_URL = URL.create(
         drivername="postgresql",
         username=USER,
         password=PASS,

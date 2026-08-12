@@ -1,11 +1,12 @@
 services:
   api:
-    command: fastapi run
-    # uvicorn app.main:app --host 0.0.0.0 
-    # >
-    #  sh -c "fastapi run"
+    command: pytest
     depends_on:
       - postgres
+    env_file:
+      - ./envs/.env
+    environment:
+      - ENV_MODE=prod
     build: .
     ports:
       - "8000:8000"
