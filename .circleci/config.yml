@@ -9,8 +9,6 @@ jobs:
       - run:
           name: Check Python Version
           command: python --version
-      - python/install-packages:
-          pkg-manager: pip
       - run:
           name: Install virtual env
           command: python3 -m venv .venv
