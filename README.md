@@ -91,16 +91,26 @@ coverage:
 
 - Linux/Mac terminal
 - Python
-- Docker and Docker compose installed
-- No services running on localhost port 8000
+- Docker and Docker compose installed without 'sudo' permission
+- No services running on localhost port 8000 and 5432
 
 ## Run APP
 
-```Pending```
+Run the following command:
+
+```bash
+chmod 711 ./run_app.sh
+./run_app.sh
+```
 
 ## Run Tests
 
-```Pending```
+Run the following command:
+
+```bash
+chmod 711 ./run_tests.sh
+./run_tests.sh
+```
 
 ## Precommit hooks
 
@@ -109,6 +119,20 @@ coverage:
 ```precommit install```
 
 This will trigger black formatter and ruff linter. If code is not align with ruff standard the commit will fail.
+
+## Decision made
+
+- Clean architecture: It was selectec because it will help you to add functionalities more adaptable and mantainable. Additionally, this architecture pattern let the project be more scalable and get a well-made project structure.
+
+- SQlAlchemy: It is an ORM that let you handle database 'crud' functionalities related with relational databases.
+  
+- Pydantic: It is a dependency that let us create model to send or receive to the database operations.
+
+- Docker: let the app be more portable.
+
+- Pytest(E2E): Help us to create tests such as unit test and integration test but in this project I choose just integration tests because the project doesn't have complex business logic and the main focuse is to test the whole functionalities or behaviors.
+
+- Ruff: It is light dependency and has linter and formatter letting you set both it in a easily way.
 
 ## Standars Applied
 
@@ -298,19 +322,25 @@ Steps:
        1. Detached Mode:
        Run the container in the background using the -d flag. This allows you to continue using your terminal while the container runs ```docker run -d image_name:tag```
        2. Interactive Mode: Use the -it flags to run the container and attach your terminal to it, allowing you to interact with the shell inside the container ```docker run -it image-name:tag /bin/bash```
+       3. Remove docker image:
+       ```docker rmi -f id-number```
 15. Docker Compose (API and DB): ✅
     1. Docker compose file
     2. Run docker compose file:
        1. Build docker compose:
-        ```docker-compose build```
+        ```docker compose build```
        2. Run application:
-        ```docker-compose up```
+        ```docker compose up```
        3. Stop and remove container:
-        ```docker-compose down```  
+        ```docker compose down```  
+       4. Recreate build:
+        ```docker compose up --build --force-recreate```
+       5. Specific docker compose file:
+        ```docker compose -f docker-compose-specific-file.yml up```
 16. Readme ✅
 17. Deployement or Release
 18. Coveralls
-19. Circle CI
+19. Budge Circle CI
 
 Dependencies:
 
@@ -330,22 +360,7 @@ Dependencies:
   pip install ruff
 ```
 
-## Settings
-
-- all the folder inside 'app' must have the file '__init__.py'
-- pyproject.toml set the following:
-
-```ruby
-[tool.fastapi]
-entrypoint = "app.main:app"
-```
-
-- to run the application you cursor on terminal will be inside folder project an execute the fastapi command:
-```fastapi dev```
-or the contrary
-```fastapi dev app.main```
-
-## Recomendations
+## To Keep in mind
 
 1. Review carefully the data base models inside 'db/models' folder
 2. Load database and create table firstly by code 'Base.metadata.create_all(bind=engine)'
@@ -353,3 +368,11 @@ or the contrary
 4. Pydantic is a library for automatic request and response validation, serialization, and interactive API Documentation
    Request and response schemas are commonly placed to 'schemas' folder.
 5. Moto is a library that allows your tests to easily mock out AWS Services.
+
+## Areas to improve
+
+- Implement .dockerignore
+- Error handling could be improved
+- 'Alembic' migrations functionality should be implemented to use Postgress database in case of sqlite.
+- Unit Test in case the are complex business logic with operation arithmetics.
+- Specify de V1 and V2 documentation access When the app is running by docker compose.
