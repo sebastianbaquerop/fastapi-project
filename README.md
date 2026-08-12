@@ -349,11 +349,11 @@ Steps:
        5. Specific docker compose file:
         ```docker compose -f docker-compose-specific-file.yml up```
 16. Readme ✅
-17. Budge Circle CI
+17. Budge Circle CI ✅
     1. Folder ```.circleci/```
     2. Config file ```config.yml```
-18. Deployement or Release
-19. Coveralls
+18. Coveralls
+19. Deployement or Release
 
 Dependencies:
 
