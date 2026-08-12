@@ -34,9 +34,10 @@ Sebastián Baquero
 
 ## Badges
 
-build:
+ Build: [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/EbKKirRjtcnCrjyHLw7SRY/RJogdDvnRt8kyT4tuwgNzq/tree/main)
 
 coverage:
+
 
 ## Table of contents
 
@@ -143,27 +144,37 @@ This will trigger black formatter and ruff linter. If code is not align with ruf
 
 ## CI/CD Integration
 
-Github actions:
+Circle CI:
+
+```config.yml```
 
 ```yml
+version: 2.1
 
-name: Lint and Format
-
-on: [push, pull_request]
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+  build_and_test:
+    docker:
+      - image: cimg/python:3.11
     steps:
-      - uses: actions/checkout@v4 # review
-      - uses: actions/setup-python@v4 #review
-        with:
-          python-version: '3.11'
-      - name: Install dependencies
-        run: pip install ruff
-      - name: Lint with ruff
-        run: ruff check .
-      - name: Format with ruff
-        run: ruff format --check .
+      - checkout
+      - run:
+          name: Check Python Version
+          command: python --version
+      - run:
+          name: Install virtual env
+          command: python3 -m venv .venv
+      - run:
+          name: Install dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: Integration Test
+          command: pytest
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test
+
 ```
 
 ##  Deployment
@@ -338,9 +349,11 @@ Steps:
        5. Specific docker compose file:
         ```docker compose -f docker-compose-specific-file.yml up```
 16. Readme ✅
-17. Deployement or Release
-18. Coveralls
-19. Budge Circle CI
+17. Budge Circle CI
+    1. Folder ```.circleci/```
+    2. Config file ```config.yml```
+18. Deployement or Release
+19. Coveralls
 
 Dependencies:
 
