@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Integration Test
           command: pytest
+      - run: 
+          name: Coverage Report
+          command: coverage run -m pytest && coverage report -m && coverage html
       - run:
           name: Coveralls
           command: coveralls/upload
