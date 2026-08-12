@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  coveralls: coveralls/coveralls@2.2.5
-
 jobs:
   build_and_test:
     docker:
@@ -21,12 +18,25 @@ jobs:
       - run:
           name: Integration Test
           command: pytest
-      - run: 
-          name: Coverage Report
-          command: coverage run -m pytest && coverage report -m && coverage html
+      - run:
+          name: Run Tests with Coverage
+          command: coverage run -m pytest tests/
+          
+      - run:
+          name: View Terminal Report
+          command: coverage report -m
+          
+      - run:
+          name: Generate HTML Report 
+          command: coverage html
+
+      - run:
+          name: Upload Data to Coveralls
+          # This tool looks for the .coverage file automatically
+          command: coveralls 
       - run:
           name: Coveralls
-          command: coveralls/upload
+          command: coveralls
 
 workflows:
   build_test_deploy:
