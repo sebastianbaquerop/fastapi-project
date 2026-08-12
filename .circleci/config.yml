@@ -5,11 +5,13 @@ orb:
 
 jobs:
   build_and_test:
-    executor:
-      name: python/default
-      tag: '3.11'
+    docker:
+      - image: cimg/python:3.11
     steps:
       - checkout
+      - run:
+          name: Check Python Version
+          command: python --version
       - python/install-packages:
           pkg-manager: pip
       - run:
@@ -21,3 +23,8 @@ jobs:
       - run:
           name: Integration Test
           command: pytest
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test
