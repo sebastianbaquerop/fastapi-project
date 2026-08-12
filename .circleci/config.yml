@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Integration Test
           command: pytest
+      - run:
+          name: Coveralls
+          command: coveralls/upload
 
 workflows:
   build_test_deploy:
