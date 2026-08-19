@@ -77,15 +77,29 @@ Sebastián Baquero
 
 ## Routes
 
+### Deployed App on Render
+
 - API Swagger:
-  - Version 1: <http://127.0.0.1:8000/v1/docs>
-  - Version 2: <http://127.0.0.1:8000/v2/docs>
+  - [Version 1](<https://fastapi-project-oosk.onrender.com/v1/docs>)
+  - [Version 2](<https://fastapi-project-oosk.onrender.com/v2/docs>)
 - API Users:
-  - Version 1: <http://127.0.0.1:8000/v1/users>
-  - Version 2: <http://127.0.0.1:8000/v2/users>
+  - [Version 1](<https://fastapi-project-oosk.onrender.com/v1/users>)
+  - [Version 2](<https://fastapi-project-oosk.onrender.com/v2/users>)
 - API Health:
-  - Version 1: <http://127.0.0.1:8000/v1/health>
-  - Version 2: <http://127.0.0.1:8000/v2/health>
+  - [Version 1](<https://fastapi-project-oosk.onrender.com/v1/health>)
+  - [Version 2](<https://fastapi-project-oosk.onrender.com/v2/health>)
+
+### Local
+
+- API Swagger:
+  - [Version 1](<http://127.0.0.1:8000/v1/docs>)
+  - [Version 2](<http://127.0.0.1:8000/v2/docs>)
+- API Users:
+  - [Version 1](<http://127.0.0.1:8000/v1/users>)
+  - [Version 2](<http://127.0.0.1:8000/v2/users>)
+- API Health:
+  - [Version 1](<http://127.0.0.1:8000/v1/health>)
+  - [Version 2](<http://127.0.0.1:8000/v2/health>)
 
 ## Pre-requisites
 
@@ -183,17 +197,6 @@ The code coverage is sent to coveralls and in that site the test coverage can be
 ## Content
 
 1. Clean Architecure (Scaffold)
-   - api/ # API endpoints (GET, POST, PATCH, PUT, DELETE) ✅
-   - core/ (call external APIs, configs, security) ✅
-   - db/ (Tables Models) ✅
-   - repositories/ (behavior to database) ✅
-   - schemas/ #Pydantic models (DTOs - Requests & Responses) ✅
-   - services/ # Business logic and external api calls ✅
-   - test/ #Test Features (Integration Test, Unit Test)
-   - requirements.txt # To generate dependencies on this file you have to run:  ```pip freeze > requirements.txt``` ✅
-   - envs # Environment folder ✅
-   - .env # Environment files with secrets and variables per environment ✅
-
    - api/ # API endpoints (GET, POST, PATCH, PUT, DELETE) ✅
    - core/ (call external APIs, configs, security) ✅
    - db/ (Tables Models) ✅
@@ -352,8 +355,85 @@ Steps:
     1. Folder ```.circleci/```
     2. Config file ```config.yml```
 18. Coveralls ✅
-19. Deployement or Release
+19. Deployement or Release (Render)✅
+    1. Heroku:
+       1. Install Heroku CLI - macOS
+       ```brew install heroku/brew/heroku```
+       2. Create heroku
+       ```heroku create```
+       3. Push heroku
+       ```git push heroku bran-name-principal```
+       4. Set at least on intances
+       ```heroku ps:scale web=1```
+       5. Get logs
+       ```heroku logs -tail```
+    2. Render: ✅
+      ```https://fastapi-project-oosk.onrender.com```
+
 20. ORM Migrations
+    1. Generate
+    2. Apply
+    3. Execution
+        1. Migration up
+        2. Migration down
+    4. Seed migration
+    5. Alembic
+       1. Installation
+          ```pip install alembic```
+       2. Initialization
+          ```alembic init project-name```
+       3. Installaztion of Alembic Table
+          1. Command:
+             ```pip install Audit-Alembic```
+          2. Modify env.py file:
+
+          ```python
+          # ... imports ...
+          # 1. IMPORT AUDIT-ALEMBIC
+          import audit_alembic
+          
+
+          # 2. CRITICAL PYTHON 3.13 BACKWARD COMPATIBILITY PATCH
+          if not hasattr(inspect, 'getargspec'):
+            inspect.getargspec = inspect.getfullargspec
+          
+          # 3. Define your application's current software semantic version
+          APP_VERSION = "1.0.0"
+
+          # 4. INITIALIZE THE AUTOMATED HISTORY TRACKER FACTORY
+          if not audit_alembic.alembic_supports_callback():
+              raise audit_alembic.exc.AuditSetupError(
+                  'This Alembic version does not have on_version_apply')
+          auditor = audit_alembic.Auditor.create(APP_VERSION)
+          
+          def run_migrations_offline():
+              ...
+              context.configure(
+                  ...
+                  on_version_apply=auditor.listen,
+              )
+              ...
+          
+          def run_migrations_offline():
+              ...
+              context.configure(
+                  ...
+                  on_version_apply=auditor.listen
+              )
+          ```
+
+       4. Create manual migration
+          ```alembic revision -m "create schema ecommerce"```
+       5. Execute the migration
+          ```alembic upgrade head```
+       6. Check migration
+          ```alembic current```
+       7. History of migrations
+          ```alembic history -verbose```
+       8. Revert the migration
+          ```alembic downgrade -1```
+       9. Revission autogerated
+          ```alembic revision --autogenerate -m "Added account table"```
 
 Dependencies:
 
@@ -389,3 +469,4 @@ Dependencies:
 - 'Alembic' migrations functionality should be implemented to use Postgress database in case of sqlite.
 - Unit Test in case the are complex business logic with operation arithmetics.
 - Specify de V1 and V2 documentation access When the app is running by docker compose.
+- Implement a seed to create database with data preloaded

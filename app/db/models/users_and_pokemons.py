@@ -19,6 +19,9 @@ class UsersAndPokemons(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     hashed_password = Column(String(128), nullable=False)
     role = Column(String(20), default="user")
+    address = Column(String(100), nullable=True)
+    mobile = Column(String(100), nullable=True)
+    phone = Column(String(100), nullable=True)
 
     # ARRAY is for Postgres database
     # pokemons = Column(ARRAY(Integer), nullable=False)
