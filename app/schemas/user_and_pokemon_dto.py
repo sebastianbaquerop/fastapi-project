@@ -11,6 +11,7 @@ class UsersAndPokemonsDTO(BaseModel):
     role: str
     hashed_password: str
     pokemon_ids: list[int]
+    address: str
     created_at: Optional[datetime] = datetime.now(timezone.utc)
     updated_at: Optional[datetime] = datetime.now(timezone.utc)
 

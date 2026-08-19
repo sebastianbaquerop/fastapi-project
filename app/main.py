@@ -79,4 +79,4 @@ app.mount("/v2", app_v2, name="API version 2")
 
 @app.get("/", tags=["App"])
 async def root():
-    return {"message": "API Gateway", "documentation": {"v1": "/v1/docs"}}
+    return {"message": "API Gateway", "documentation": {"v1": "/v1/docs","v2": "/v2/docs"}}
